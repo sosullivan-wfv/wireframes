@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body ng-app="prototype" ng-controller="PrototypeCtrl">
+    <div>
+        <ul class="nav nav-tabs">
+            <li><a href="#tab-1" role="tab" data-toggle="tab">All</a></li>
+            <li class="active"><a href="#tab-2" role="tab" data-toggle="tab">Transactions</a></li>
+            <li><a href="#tab-3" role="tab" data-toggle="tab">Hourlies</a></li>
+            <li><a href="#tab-4" role="tab" data-toggle="tab">Trips</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" role="tabpanel" id="tab-1">
+            </div>
+            <div class="tab-pane active" role="tabpanel" id="tab-2">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Airport </th>
+                                <th>Monday </th>
+                                <th>Tuesday </th>
+                                <th>Wednesday </th>
+                                <th>Thursday </th>
+                                <th>Friday </th>
+                                <th>Saturday </th>
+                                <th>Sunday </th>
+                                <th>Totals </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="types in transactions track by $index">
+                                <th>{{ $index === 0 ? 'Rentals' : 'Returns' }}</th>
+                                <td ng-repeat="day in types track by $index"><input type="number" min="0" ng-model="transactions[$parent.$index][$index]"></td>
+                                <th>{{ sumArray(types) }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane" role="tabpanel" id="tab-3">
+                <p> </p>
+            </div>
+            <div class="tab-pane" role="tabpanel" id="tab-4">
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a ng-click="setTripDay(0)" role="tab" data-toggle="tab">Monday</a></li>
+                        <li><a ng-click="setTripDay(1)" role="tab" data-toggle="tab">Tuesday </a></li>
+                        <li><a ng-click="setTripDay(2)" role="tab" data-toggle="tab">Wednesday </a></li>
+                        <li><a ng-click="setTripDay(3)" role="tab" data-toggle="tab">Thursday </a></li>
+                        <li><a ng-click="setTripDay(4)" role="tab" data-toggle="tab">Friday </a></li>
+                        <li><a ng-click="setTripDay(5)" role="tab" data-toggle="tab">Saturday </a></li>
+                        <li><a ng-click="setTripDay(6)" role="tab" data-toggle="tab">Sunday </a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>APO</th>
+                                            <th>ATL</th>
+                                            <th>SCTR</th>
+                                            <th>SGN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in trips[tripDay] track by $index">
+                                            <th>{{ $index === 0 ? 'APO' : $index === 1 ? 'ATL' : $index === 2 ? 'SCTR' : $index === 3 ? 'SGN' : '' }}</th>
+                                            <td ng-repeat="column in row track by $index"><input type="number" min="0" ng-model="trips[tripDay][$parent.$index][$index]" ng-hide="$index == $parent.$index"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" role="tabpanel" id="tab-6"></div>
+                        <div class="tab-pane" role="tabpanel" id="tab-7"></div>
+                        <div class="tab-pane" role="tabpanel" id="tab-8"></div>
+                        <div class="tab-pane" role="tabpanel" id="tab-9"></div>
+                        <div class="tab-pane" role="tabpanel" id="tab-10"></div>
+                        <div class="tab-pane" role="tabpanel" id="tab-11"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/angular/angular.min.js"></script>
+    <script src="assets/js/a.js"></script>
+</body>
+</html>
